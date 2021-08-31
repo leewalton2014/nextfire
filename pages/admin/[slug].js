@@ -1,6 +1,7 @@
 import styles from "../../styles/Admin.module.css";
 import AuthCheck from "../../components/AuthCheck";
 import { firestore, auth, serverTimestamp } from "../../lib/firebase";
+import ImageUploader from "../../components/ImageUploader";
 
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -63,10 +64,15 @@ function PostManager() {
 }
 
 function PostForm({ defaultValues, postRef, preview }) {
-    const { register, handleSubmit, reset, watch } = useForm({
-        defaultValues,
-        mode: "onChange",
-    });
+    const {
+        register,
+        handleSubmit,
+        reset,
+        watch,
+        formState: { errors },
+    } = useForm({ defaultValues, mode: "onChange" });
+
+    //const { isValid, isDirty } = formState;
 
     const updatePost = async ({ content, published }) => {
         await postRef.update({
@@ -89,7 +95,39 @@ function PostForm({ defaultValues, postRef, preview }) {
             )}
 
             <div className={preview ? styles.hidden : styles.controls}>
-                <textarea name="content" {...register("content")}></textarea>
+                <ImageUploader />
+
+                <textarea
+                    name="content"
+                    {...register("content", {
+                        maxLength: {
+                            value: 20000,
+                            message: "content is too long",
+                        },
+                        minLength: {
+                            value: 10,
+                            message: "content is too short",
+                        },
+                        required: {
+                            value: true,
+                            message: "content is required",
+                        },
+                    })}
+                ></textarea>
+                {/* {errors.content && (
+                    <p className="text-danger">{errors.content.message}</p>
+                )} */}
+                {errors.content && errors.content.type === "required" && (
+                    <p className="text-danger">This is required</p>
+                )}
+                {errors.content && errors.content.type === "maxLength" && (
+                    <p className="text-danger">Max length exceeded</p>
+                )}
+                {errors.content && errors.content.type === "minLength" && (
+                    <p className="text-danger">Min length required</p>
+                )}
+
+                {console.log(errors)}
 
                 <fieldset>
                     <input
@@ -100,8 +138,11 @@ function PostForm({ defaultValues, postRef, preview }) {
                     />
                     <label>Published</label>
                 </fieldset>
-
-                <button type="submit" className="btn-green">
+                <button
+                    type="submit"
+                    className="btn-green"
+                    disabled={errors.content}
+                >
                     Save Changes
                 </button>
             </div>
