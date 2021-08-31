@@ -5,7 +5,7 @@ import Metatags from "../components/Metatags";
 import { useState } from "react";
 
 // Max post to query per page
-const LIMIT = 1;
+const LIMIT = 10;
 
 export async function getServerSideProps(context) {
     const postsQuery = firestore
@@ -48,12 +48,12 @@ export default function Home(props) {
         setPosts(posts.concat(newPosts));
         setLoading(false);
 
-        if (newPosts.length < limit) {
+        if (newPosts.length < LIMIT) {
             setPostsEnd(true);
         }
     };
 
-    return posts ? (
+    return false ? (
         <main>
             <Metatags
                 title="Home Feed"
