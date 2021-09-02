@@ -1,11 +1,19 @@
+import Image from "next/image";
+
 // UI component for user profile
 export default function UserProfile({ user }) {
     return (
         <div className="box-center">
-            <img
-                src={user.photoURL || "/hacker.png"}
-                className="card-img-center"
-            />
+            <div className="profile-img-center">
+                <Image
+                    src={user?.photoURL || "/hacker.png"}
+                    alt="profile picture"
+                    width="100"
+                    height="100"
+                    layout="responsive"
+                />
+            </div>
+
             <p>
                 <i>@{user.username}</i>
             </p>
