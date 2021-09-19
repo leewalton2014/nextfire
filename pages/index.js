@@ -63,6 +63,10 @@ export default function Home(props) {
         </main>
     ) : (
         <main>
+            <Metatags
+                title="Home Feed"
+                description="this is the main home feed for content"
+            />
             <PostFeed posts={posts} />
 
             {!loading && !postsEnd && (

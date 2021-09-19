@@ -3,12 +3,18 @@ import { UserContext } from "../lib/context";
 import { useEffect, useState, useCallback, useContext } from "react";
 import debounce from "lodash.debounce";
 import Image from "next/image";
+import Metatags from "@components/Metatags";
 
 export default function EnterPage({}) {
     const { user, username } = useContext(UserContext);
 
     return (
         <main>
+            <Metatags
+                title="Welcome"
+                description="Login page | login or signup"
+            />
+
             {user ? (
                 !username ? (
                     <UsernameForm />

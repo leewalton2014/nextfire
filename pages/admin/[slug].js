@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import Metatags from "@components/Metatags";
+
 
 export default function AdminPostEdit(props) {
     return (
@@ -37,6 +39,11 @@ function PostManager() {
         <main className={styles.container}>
             {post && (
                 <>
+                    <Metatags
+                        title="Edit Post"
+                        description={post.title}
+                    />
+
                     <section>
                         <h1>{post.title}</h1>
                         <p>ID: {post.slug}</p>
