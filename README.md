@@ -16,7 +16,19 @@
 
 ## Data structure
 
-![Page Preview](./images/data.png)
+```
+{
+    content: "## post content here",
+    createdAt: "31 August 2021 at 04:59:43 UTC+1",
+    heartCount: 0,
+    published: true,
+    slug: "post-title-here",
+    title: "New post for blog",
+    uid: "",
+    updatedAt: "31 August 2021 at 04:59:43 UTC+1",
+    username: "lee",
+}
+```
 
 ## Technologies used
 
