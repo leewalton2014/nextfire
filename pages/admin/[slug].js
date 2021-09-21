@@ -13,7 +13,6 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import Metatags from "@components/Metatags";
 
-
 export default function AdminPostEdit(props) {
     return (
         <AuthCheck>
@@ -39,10 +38,7 @@ function PostManager() {
         <main className={styles.container}>
             {post && (
                 <>
-                    <Metatags
-                        title="Edit Post"
-                        description={post.title}
-                    />
+                    <Metatags title="Edit Post" description={post.title} />
 
                     <section>
                         <h1>{post.title}</h1>
@@ -60,7 +56,7 @@ function PostManager() {
                         <button onClick={() => setPreview(!preview)}>
                             {preview ? "Edit" : "Preview"}
                         </button>
-                        <Link href={`/${post.username}/${post.slug}`}>
+                        <Link href={`/${post.username}/${post.slug}`} passHref>
                             <button className="btn-blue">Live view</button>
                         </Link>
                     </aside>
