@@ -34,7 +34,7 @@ function SignInButton() {
         await auth.signInWithPopup(googleAuthProvider);
     };
     return (
-        <button className="btn-google" onClick={() => signInWithGoogle}>
+        <button className="btn-google" onClick={signInWithGoogle}>
             <div className="btn-img">
                 <Image
                     src={"/google.png"}
@@ -51,7 +51,7 @@ function SignInButton() {
 
 //sign out Button
 function SignOutButton() {
-    return <button onclick={() => auth.signOut()}>Sign Out</button>;
+    return <button onClick={() => auth.signOut()}>Sign Out</button>;
 }
 
 //username form
